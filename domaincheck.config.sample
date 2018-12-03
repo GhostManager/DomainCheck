@@ -1,0 +1,16 @@
+[Namecheap]
+namecheap_api_key: 
+namecheap_username: 
+namecheap_api_username: 
+client_ip: 
+namecheap_page_size: 100
+
+[VirusTotal]
+virustotal_api_key: 
+
+[Slack]
+slack_username: Domain Monitor Bot
+slack_channel: #general
+slack_alert_target: @here
+slack_emoji: :broken_heart:
+slack_webhook_url: 
