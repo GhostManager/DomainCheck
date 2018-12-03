@@ -1,0 +1,7 @@
+*.pyc
+*.lock
+
+.DS_Store
+.vscode
+
+*.config

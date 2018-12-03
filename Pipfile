@@ -4,14 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-click = "*"
 bs4 = "*"
-lxml = "*"
-requests = "*"
-pytesseract = "*"
-pillow = "*"
-opencv-python = "*"
+click = "*"
 cymon = "*"
+lxml = "*"
+pillow = "*"
+pytesseract = "*"
+requests = "*"
 
 [dev-packages]
 pylint = "*"
