@@ -633,7 +633,7 @@ class DomainReview(object):
                        "All Categories", "IBM X-Force", "Talos", "Bluecoat", "Fortiguard", 
                        "OpenDNS", "TrendMicro", "MX Toolbox"]
         with open('domain_health.csv', mode='w') as report:
-            report_writer = csv.writer(report, delimiter=', ', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            report_writer = csv.writer(report, delimiter=',' , quotechar='"', quoting=csv.QUOTE_MINIMAL)
             report_writer.writerow(csv_headers)
             for domain in lab_results:
                 health = lab_results[domain]['health']
