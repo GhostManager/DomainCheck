@@ -39,10 +39,10 @@ class AliasedGroup(click.Group):
             return None
         elif len(matches) == 1:
             return click.Group.get_command(self, ctx, matches[0])
-        ctx.fail("Too many matches: %s" % ", ".join(sorted(matches)))
+        ctx.fail('Too many matches: %s' % ', '.join(sorted(matches)))
 
 # That's right, we support -h and --help! Not using -h for an argument like 'host'! ;D
-CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"], max_content_width=200)
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'], max_content_width=200)
 @click.group(cls=AliasedGroup, context_settings=CONTEXT_SETTINGS)
 
 # Note: The following function descriptors will look weird and some will contain '\n' in spots.
@@ -74,8 +74,8 @@ def checkup(self, filter_list, wiki):
 Collect all domain names under the Namecheap account and perform a health checkup on all of them.
     """
     if filter_list:
-        filter_list = filter_list.split(", ")
-        click.secho("[+] Filtering domain list to only check:\n{}".format("\t\n".join(filter_list)), fg='green')
+        filter_list = filter_list.split(', ')
+        click.secho('[+] Filtering domain list to only check:\n{}'.format('\t\n'.join(filter_list)), fg='green')
     # Get the list of domains and review each one
     domain_review = review.DomainReview()
     domains_list = domain_review.get_domain_list()
@@ -85,29 +85,29 @@ Collect all domain names under the Namecheap account and perform a health checku
     if wiki:
         domain_review.print_confluence_table(lab_results)
 
-@domaincheck.command(name='monitor', short_help="Monitors the provided list of domain names for \
-changes in categorization or status.")
-@click.option('-d', '--domains', help="A comma-separated list of domains to monitor. The provided \
-domain names will only be checked if they are owned by the Namecheap account being used.", required=True)
-@click.option('-i', '--interval', type=int, help="How long (in minutes) to wait between health checkups.", required=True)
-@click.option('--slack', is_flag=True, help="Enable this flag to send Slack notifications instead \
+@domaincheck.command(name='monitor', short_help='Monitors the provided list of domain names for \
+changes in categorization or status.')
+@click.option('-d', '--domains', help='A comma-separated list of domains to monitor. The provided \
+domain names will only be checked if they are owned by the Namecheap account being used.', required=True)
+@click.option('-i', '--interval', type=int, help='How long (in minutes) to wait between health checkups.', required=True)
+@click.option('--slack', is_flag=True, help='Enable this flag to send Slack notifications instead \
 of messages in the terminal. This requires the Slack config section to be completed in your \
-domaincheck.config file.", required=True)
+domaincheck.config file.', required=True)
 # Pass the above arguments on to your verify function
 @click.pass_context
 
-def monitor(self, filter_list, interval, slack):
+def monitor(self, domains, interval, slack):
     """
 Monitor the provided list of domain names for changes in categorization.
     """
-    filter_list = domains.split(", ")
+    filter_list = domains.split(', ')
     domain_review = review.DomainReview()
     domains_list = domain_review.get_domain_list()
-    click.secho('[+] Starting monitor mode with checkups every {} minutes. Here we go!'.format(interval))
+    click.secho('[+] Starting monitor mode with checkups every {} minutes. Here we go!'.format(interval), fg='green')
     while True:
         lab_results = domain_review.check_domain_status(domains_list, filter_list)
         domain_review.generate_monitor_message(lab_results, slack)
-        print("[+] Sleeping for {} minutes...".format(interval))
+        click.secho('[+] Sleeping for {} minutes...'.format(interval), fg='green')
         sleep(round(interval/60, 2))
 
 if __name__ == "__main__":

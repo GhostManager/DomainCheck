@@ -4,6 +4,12 @@ DomainCheck is designed to assist operators with monitoring changes related to t
 
 DomainCheck pulls a list of domains registered under the provided Namecheap account and then reviews each one to ensure it is ready to be used. This involves checking to see if Namecheap's WhoisGuard is enabled, the domain is not expired, the domain is properly categorized, the domain has not been flagged in VirusTotal or tagged with a bad category, and the domain is not blacklisted for spam.
 
+## Shepherd
+
+If you like DomainCheck, you may want to look at the Shepherd project. More information here: https://posts.specterops.io/being-a-good-domain-shepherd-part-2-5e8597c3fe63
+
+Shepherd is a Django application with DomainCheck's functionality baked in, scheduled domain update tasks, and more.
+
 ## Information Sources
 
 DomainReview uses the following sources to check the health of a domain name:
@@ -71,3 +77,10 @@ DomainCheck uses a domaincheck.config file. A sample is provided which can be ed
 ## Acknowledgments
 
 Special thanks to [SpecterOps](https://specterops.io) for supporting this project!
+
+## Change Log
+
+### 21 December 2018
+
+* Made some improvements and tweaks to the wiki and csv output.
+* Added missing logic that would mark a domain as burned if one its categories appeared in the category blacklist.
